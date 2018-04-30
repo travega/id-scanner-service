@@ -18,7 +18,10 @@ class App < Sinatra::Base
         end
 
         puts params["name"]
-        puts Stock.first.dc_stock_target__c
+        
+        IdentifiedPerson.all.each do |identified_person|
+            puts identified_person.name
+        end
 
         { message: "Awesome Sauce!" }.to_json
     end
