@@ -1,7 +1,7 @@
 require "sinatra"
 require 'sinatra/activerecord'
 require 'json'
-require './models/stock'
+require './models/identified_person'
 
 set :database_file, "./config/database.yml"
 
@@ -18,7 +18,7 @@ class App < Sinatra::Base
         end
 
         puts params["name"]
-        
+
         IdentifiedPerson.all.each do |identified_person|
             puts identified_person.name
         end
