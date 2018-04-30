@@ -1,11 +1,11 @@
 development:
   adapter: postgresql
   encoding: unicode
-  host: ec2-34-252-42-55.eu-west-1.compute.amazonaws.com
-  database: d96rjper8bpega
+  host: ec2-54-247-125-137.eu-west-1.compute.amazonaws.com
+  database: dj9k78es1flcq
   pool: 2
-  username: u7i2s438ef2r8a
-  password: pe220f537ebda4ef5f32c0ceb77dda698da3b0a2d45986288f8fb64a88daab89e
+  username: mlltcqhopccwox
+  password: 8d78af787126b27fddf6b74daa52d761cfba46e278386ab77ac050b82c58b8b1
 
 production:
   adapter: postgresql
