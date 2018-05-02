@@ -17,32 +17,44 @@ class App < Sinatra::Base
             return {error: "Error parsing JSON."}.to_json
         end
 
-        fname = params["fname"]
-        lname = params["lname"]
-        gender = params["gender"]
-        dob = params["dob"]
-        travel_doc_type = params["travelDocType"]
-        nationality = params["nationality"]
-        doc_code = params["docCode"]
+        begin
+            IdentifiedPerson.create!(identified_person_payload(params));
+            person = Patient.create!(patient_payload(params));
 
-        payload = {
-            name: "#{fname} #{lname}",
-            first_name__c: fname,
-            last_name__c: lname,
-            gender__c: gender,
-            date_of_birth__c: dob,
-            travel_doc_type__c: travel_doc_type,
-            nationality__c: nationality,
-            document_code__c: doc_code,
+            IdentifiedPerson.all.each do |identified_person|
+                puts identified_person.name
+            end
+
+            { message: "'#{person.name}' record Successfully created!" }.to_json
+        rescue
+            return {error: "Error saving ID record."}.to_json
+        end
+    end
+
+    def patient_payload(params)
+        {
+            name: "#{params["fname"]} #{params["lname"]}",
+            legal_first_name__c: params["fname"],
+            legal_last_name__c: params["lname"],
+            gender__c: params["gender"],
+            date_of_birth__c: params["dob"],
+            id_type__c: params["travelDocType"],
+            nationality__c: params["nationality"],
+            document_code__c: params["docCode"]
+        }
+    end
+
+    def identified_person_payload(params)
+        {
+            name: "#{params["fname"]} #{params["lname"]}",
+            first_name__c: params["fname"],
+            last_name__c: params["lname"],
+            gender__c: params["gender"],
+            date_of_birth__c: params["dob"],
+            travel_doc_type__c: arams["travelDocType"],
+            nationality__c: params["nationality"],
+            document_code__c: params["docCode"],
             external_id__c: SecureRandom.hex(12)
         }
-
-        IdentifiedPerson.create!(payload);
-
-        IdentifiedPerson.all.each do |identified_person|
-            puts identified_person.name
-        end
-
-        { message: "Awesome Sauce!" }.to_json
     end
 end
