@@ -5,6 +5,7 @@ require './models/identified_person'
 
 set :database_file, "./config/database.yml"
 
+# TYhis od s vommr
 class App < Sinatra::Base
     register Sinatra::ActiveRecordExtension
 
